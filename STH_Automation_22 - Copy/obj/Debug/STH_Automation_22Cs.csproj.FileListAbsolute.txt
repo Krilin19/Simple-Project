@@ -1,0 +1,16 @@
+C:\Users\alopez\Documents\GitHub\VisualStudioRevitAddinWizard\cs\bin\Debug\STH_Automation_22.dll
+C:\Users\alopez\Documents\GitHub\VisualStudioRevitAddinWizard\cs\bin\Debug\STH_Automation_22.pdb
+C:\Users\alopez\Documents\GitHub\VisualStudioRevitAddinWizard\cs\bin\Debug\EPPlus.dll
+C:\Users\alopez\Documents\GitHub\VisualStudioRevitAddinWizard\cs\obj\Debug\STH_Automation_22Cs.csproj.AssemblyReference.cache
+C:\Users\alopez\Documents\GitHub\VisualStudioRevitAddinWizard\cs\obj\Debug\STH_Automation_22Cs.csproj.CoreCompileInputs.cache
+C:\Users\alopez\Documents\GitHub\VisualStudioRevitAddinWizard\cs\obj\Debug\STH_Automation_22Cs.csproj.CopyComplete
+C:\Users\alopez\Documents\GitHub\VisualStudioRevitAddinWizard\cs\obj\Debug\STH_Automation_22.dll
+C:\Users\alopez\Documents\GitHub\VisualStudioRevitAddinWizard\cs\obj\Debug\STH_Automation_22.pdb
+C:\Users\alopez\Source\Repos\STH_Automation_22\bin\Debug\STH_Automation_22.dll
+C:\Users\alopez\Source\Repos\STH_Automation_22\bin\Debug\STH_Automation_22.pdb
+C:\Users\alopez\Source\Repos\STH_Automation_22\bin\Debug\EPPlus.dll
+C:\Users\alopez\Source\Repos\STH_Automation_22\obj\Debug\STH_Automation_22Cs.csproj.AssemblyReference.cache
+C:\Users\alopez\Source\Repos\STH_Automation_22\obj\Debug\STH_Automation_22Cs.csproj.CoreCompileInputs.cache
+C:\Users\alopez\Source\Repos\STH_Automation_22\obj\Debug\STH_Automation_22Cs.csproj.CopyComplete
+C:\Users\alopez\Source\Repos\STH_Automation_22\obj\Debug\STH_Automation_22.dll
+C:\Users\alopez\Source\Repos\STH_Automation_22\obj\Debug\STH_Automation_22.pdb

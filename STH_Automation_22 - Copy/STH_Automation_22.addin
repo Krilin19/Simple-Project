@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<RevitAddIns>
+  <AddIn Type="Application">
+    <Name>STH_Automation_22</Name>
+    <Assembly>STH_Automation_22\STH_Automation_22.dll</Assembly>
+	 <FullClassName>STH_Automation_22.ribbonUI</FullClassName>
+    <ClientId>34C32EA6-DDF8-4ED0-BAE0-7468DE9BC0F6</ClientId>
+    <VendorId>STH</VendorId>
+    <VendorDescription>Alexander lopez , Alexander@elitesurvery.com.au</VendorDescription>
+  </AddIn>
+</RevitAddIns>
