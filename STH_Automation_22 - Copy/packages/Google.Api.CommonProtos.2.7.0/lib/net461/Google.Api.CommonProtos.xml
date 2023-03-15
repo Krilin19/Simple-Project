@@ -5900,7 +5900,7 @@
         </member>
         <member name="F:Google.Rpc.Code.Ok">
              <summary>
-             Not an error; returned on success.
+             Not an error; returned on success
             
              HTTP Mapping: 200 OK
              </summary>
@@ -5949,7 +5949,7 @@
              Some requested entity (e.g., file or directory) was not found.
             
              Note to server developers: if a request is denied for an entire class
-             of users, such as gradual feature rollout or undocumented allowlist,
+             of users, such as gradual feature rollout or undocumented whitelist,
              `NOT_FOUND` may be used. If a request is denied for some users within
              a class of users, such as user-based access control, `PERMISSION_DENIED`
              must be used.
@@ -6005,11 +6005,11 @@
              Service implementors can use the following guidelines to decide
              between `FAILED_PRECONDITION`, `ABORTED`, and `UNAVAILABLE`:
               (a) Use `UNAVAILABLE` if the client can retry just the failing call.
-              (b) Use `ABORTED` if the client should retry at a higher level. For
-                  example, when a client-specified test-and-set fails, indicating the
-                  client should restart a read-modify-write sequence.
+              (b) Use `ABORTED` if the client should retry at a higher level
+                  (e.g., when a client-specified test-and-set fails, indicating the
+                  client should restart a read-modify-write sequence).
               (c) Use `FAILED_PRECONDITION` if the client should not retry until
-                  the system state has been explicitly fixed. For example, if an "rmdir"
+                  the system state has been explicitly fixed.  E.g., if an "rmdir"
                   fails because the directory is non-empty, `FAILED_PRECONDITION`
                   should be returned since the client should not retry unless
                   the files are deleted from the directory.
@@ -6227,7 +6227,7 @@
             <summary>
             The identity of this peer. Similar to `Request.auth.principal`, but
             relative to the peer instead of the request. For example, the
-            identity associated with a load balancer that forwarded the request.
+            idenity associated with a load balancer that forwared the request.
             </summary>
         </member>
         <member name="F:Google.Rpc.Context.AttributeContext.Types.Peer.RegionCodeFieldNumber">
@@ -6412,7 +6412,7 @@
         </member>
         <member name="P:Google.Rpc.Context.AttributeContext.Types.Request.Path">
             <summary>
-            The HTTP URL path, excluding the query parameters.
+            The HTTP URL path.
             </summary>
         </member>
         <member name="F:Google.Rpc.Context.AttributeContext.Types.Request.HostFieldNumber">
@@ -6532,7 +6532,7 @@
         </member>
         <member name="P:Google.Rpc.Context.AttributeContext.Types.Response.BackendLatency">
             <summary>
-            The amount of time it takes the backend service to fully respond to a
+            The length of time it takes the backend service to fully respond to a
             request. Measured from when the destination service starts to send the
             request to the backend until when the destination service receives the
             complete response from the backend.
@@ -6582,8 +6582,7 @@
              The type of the resource. The syntax is platform-specific because
              different platforms define their resources differently.
             
-             For Google APIs, the type format must be "{service}/{kind}", such as
-             "pubsub.googleapis.com/Topic".
+             For Google APIs, the type format must be "{service}/{kind}".
              </summary>
         </member>
         <member name="F:Google.Rpc.Context.AttributeContext.Types.Resource.LabelsFieldNumber">
@@ -6680,136 +6679,11 @@
              `cloud.googleapis.com/location` label used by some Google Cloud APIs.
              </summary>
         </member>
-        <member name="T:Google.Rpc.Context.AuditContextReflection">
-            <summary>Holder for reflection information generated from google/rpc/context/audit_context.proto</summary>
-        </member>
-        <member name="P:Google.Rpc.Context.AuditContextReflection.Descriptor">
-            <summary>File descriptor for google/rpc/context/audit_context.proto</summary>
-        </member>
-        <member name="T:Google.Rpc.Context.AuditContext">
-            <summary>
-            `AuditContext` provides information that is needed for audit logging.
-            </summary>
-        </member>
-        <member name="F:Google.Rpc.Context.AuditContext.AuditLogFieldNumber">
-            <summary>Field number for the "audit_log" field.</summary>
-        </member>
-        <member name="P:Google.Rpc.Context.AuditContext.AuditLog">
-            <summary>
-            Serialized audit log.
-            </summary>
-        </member>
-        <member name="F:Google.Rpc.Context.AuditContext.ScrubbedRequestFieldNumber">
-            <summary>Field number for the "scrubbed_request" field.</summary>
-        </member>
-        <member name="P:Google.Rpc.Context.AuditContext.ScrubbedRequest">
-            <summary>
-            An API request message that is scrubbed based on the method annotation.
-            This field should only be filled if audit_log field is present.
-            Service Control will use this to assemble a complete log for Cloud Audit
-            Logs and Google internal audit logs.
-            </summary>
-        </member>
-        <member name="F:Google.Rpc.Context.AuditContext.ScrubbedResponseFieldNumber">
-            <summary>Field number for the "scrubbed_response" field.</summary>
-        </member>
-        <member name="P:Google.Rpc.Context.AuditContext.ScrubbedResponse">
-            <summary>
-            An API response message that is scrubbed based on the method annotation.
-            This field should only be filled if audit_log field is present.
-            Service Control will use this to assemble a complete log for Cloud Audit
-            Logs and Google internal audit logs.
-            </summary>
-        </member>
-        <member name="F:Google.Rpc.Context.AuditContext.ScrubbedResponseItemCountFieldNumber">
-            <summary>Field number for the "scrubbed_response_item_count" field.</summary>
-        </member>
-        <member name="P:Google.Rpc.Context.AuditContext.ScrubbedResponseItemCount">
-            <summary>
-            Number of scrubbed response items.
-            </summary>
-        </member>
-        <member name="F:Google.Rpc.Context.AuditContext.TargetResourceFieldNumber">
-            <summary>Field number for the "target_resource" field.</summary>
-        </member>
-        <member name="P:Google.Rpc.Context.AuditContext.TargetResource">
-            <summary>
-            Audit resource name which is scrubbed.
-            </summary>
-        </member>
         <member name="T:Google.Rpc.ErrorDetailsReflection">
             <summary>Holder for reflection information generated from google/rpc/error_details.proto</summary>
         </member>
         <member name="P:Google.Rpc.ErrorDetailsReflection.Descriptor">
             <summary>File descriptor for google/rpc/error_details.proto</summary>
-        </member>
-        <member name="T:Google.Rpc.ErrorInfo">
-             <summary>
-             Describes the cause of the error with structured details.
-            
-             Example of an error when contacting the "pubsub.googleapis.com" API when it
-             is not enabled:
-            
-                 { "reason": "API_DISABLED"
-                   "domain": "googleapis.com"
-                   "metadata": {
-                     "resource": "projects/123",
-                     "service": "pubsub.googleapis.com"
-                   }
-                 }
-            
-             This response indicates that the pubsub.googleapis.com API is not enabled.
-            
-             Example of an error that is returned when attempting to create a Spanner
-             instance in a region that is out of stock:
-            
-                 { "reason": "STOCKOUT"
-                   "domain": "spanner.googleapis.com",
-                   "metadata": {
-                     "availableRegions": "us-central1,us-east2"
-                   }
-                 }
-             </summary>
-        </member>
-        <member name="F:Google.Rpc.ErrorInfo.ReasonFieldNumber">
-            <summary>Field number for the "reason" field.</summary>
-        </member>
-        <member name="P:Google.Rpc.ErrorInfo.Reason">
-            <summary>
-            The reason of the error. This is a constant value that identifies the
-            proximate cause of the error. Error reasons are unique within a particular
-            domain of errors. This should be at most 63 characters and match a
-            regular expression of `[A-Z][A-Z0-9_]+[A-Z0-9]`, which represents
-            UPPER_SNAKE_CASE.
-            </summary>
-        </member>
-        <member name="F:Google.Rpc.ErrorInfo.DomainFieldNumber">
-            <summary>Field number for the "domain" field.</summary>
-        </member>
-        <member name="P:Google.Rpc.ErrorInfo.Domain">
-            <summary>
-            The logical grouping to which the "reason" belongs. The error domain
-            is typically the registered service name of the tool or product that
-            generates the error. Example: "pubsub.googleapis.com". If the error is
-            generated by some common infrastructure, the error domain must be a
-            globally unique value that identifies the infrastructure. For Google API
-            infrastructure, the error domain is "googleapis.com".
-            </summary>
-        </member>
-        <member name="F:Google.Rpc.ErrorInfo.MetadataFieldNumber">
-            <summary>Field number for the "metadata" field.</summary>
-        </member>
-        <member name="P:Google.Rpc.ErrorInfo.Metadata">
-             <summary>
-             Additional structured details about this error.
-            
-             Keys should match /[a-zA-Z0-9-_]/ and be limited to 64 characters in
-             length. When identifying the current value of an exceeded limit, the units
-             should be contained in the key, not the value.  For example, rather than
-             {"instanceLimit": "100/request"}, should be returned as,
-             {"instanceLimitPerRequest": "100"}, if the client exceeds the number of
-             instances that can be created in a single (batch) request.
-             </summary>
         </member>
         <member name="T:Google.Rpc.RetryInfo">
              <summary>
@@ -6913,6 +6787,73 @@
              exceeded".
              </summary>
         </member>
+        <member name="T:Google.Rpc.ErrorInfo">
+             <summary>
+             Describes the cause of the error with structured details.
+            
+             Example of an error when contacting the "pubsub.googleapis.com" API when it
+             is not enabled:
+            
+                 { "reason": "API_DISABLED"
+                   "domain": "googleapis.com"
+                   "metadata": {
+                     "resource": "projects/123",
+                     "service": "pubsub.googleapis.com"
+                   }
+                 }
+            
+             This response indicates that the pubsub.googleapis.com API is not enabled.
+            
+             Example of an error that is returned when attempting to create a Spanner
+             instance in a region that is out of stock:
+            
+                 { "reason": "STOCKOUT"
+                   "domain": "spanner.googleapis.com",
+                   "metadata": {
+                     "availableRegions": "us-central1,us-east2"
+                   }
+                 }
+             </summary>
+        </member>
+        <member name="F:Google.Rpc.ErrorInfo.ReasonFieldNumber">
+            <summary>Field number for the "reason" field.</summary>
+        </member>
+        <member name="P:Google.Rpc.ErrorInfo.Reason">
+            <summary>
+            The reason of the error. This is a constant value that identifies the
+            proximate cause of the error. Error reasons are unique within a particular
+            domain of errors. This should be at most 63 characters and match
+            /[A-Z0-9_]+/.
+            </summary>
+        </member>
+        <member name="F:Google.Rpc.ErrorInfo.DomainFieldNumber">
+            <summary>Field number for the "domain" field.</summary>
+        </member>
+        <member name="P:Google.Rpc.ErrorInfo.Domain">
+            <summary>
+            The logical grouping to which the "reason" belongs. The error domain
+            is typically the registered service name of the tool or product that
+            generates the error. Example: "pubsub.googleapis.com". If the error is
+            generated by some common infrastructure, the error domain must be a
+            globally unique value that identifies the infrastructure. For Google API
+            infrastructure, the error domain is "googleapis.com".
+            </summary>
+        </member>
+        <member name="F:Google.Rpc.ErrorInfo.MetadataFieldNumber">
+            <summary>Field number for the "metadata" field.</summary>
+        </member>
+        <member name="P:Google.Rpc.ErrorInfo.Metadata">
+             <summary>
+             Additional structured details about this error.
+            
+             Keys should match /[a-zA-Z0-9-_]/ and be limited to 64 characters in
+             length. When identifying the current value of an exceeded limit, the units
+             should be contained in the key, not the value.  For example, rather than
+             {"instanceLimit": "100/request"}, should be returned as,
+             {"instanceLimitPerRequest": "100"}, if the client exceeds the number of
+             instances that can be created in a single (batch) request.
+             </summary>
+        </member>
         <member name="T:Google.Rpc.PreconditionFailure">
              <summary>
              Describes what preconditions have failed.
@@ -6995,45 +6936,11 @@
             <summary>Field number for the "field" field.</summary>
         </member>
         <member name="P:Google.Rpc.BadRequest.Types.FieldViolation.Field">
-             <summary>
-             A path that leads to a field in the request body. The value will be a
-             sequence of dot-separated identifiers that identify a protocol buffer
-             field.
-            
-             Consider the following:
-            
-                 message CreateContactRequest {
-                   message EmailAddress {
-                     enum Type {
-                       TYPE_UNSPECIFIED = 0;
-                       HOME = 1;
-                       WORK = 2;
-                     }
-            
-                     optional string email = 1;
-                     repeated EmailType type = 2;
-                   }
-            
-                   string full_name = 1;
-                   repeated EmailAddress email_addresses = 2;
-                 }
-            
-             In this example, in proto `field` could take one of the following values:
-            
-             * `full_name` for a violation in the `full_name` value
-             * `email_addresses[1].email` for a violation in the `email` field of the
-               first `email_addresses` message
-             * `email_addresses[3].type[2]` for a violation in the second `type`
-               value in the third `email_addresses` message.
-            
-             In JSON, the same values are represented as:
-            
-             * `fullName` for a violation in the `fullName` value
-             * `emailAddresses[1].email` for a violation in the `email` field of the
-               first `emailAddresses` message
-             * `emailAddresses[3].type[2]` for a violation in the second `type`
-               value in the third `emailAddresses` message.
-             </summary>
+            <summary>
+            A path leading to a field in the request body. The value will be a
+            sequence of dot-separated identifiers that identify a protocol buffer
+            field. E.g., "field_violations.field" would identify this field.
+            </summary>
         </member>
         <member name="F:Google.Rpc.BadRequest.Types.FieldViolation.DescriptionFieldNumber">
             <summary>Field number for the "description" field.</summary>
@@ -7089,8 +6996,7 @@
             <summary>
             The name of the resource being accessed.  For example, a shared calendar
             name: "example.com_4fghdhgsrgh@group.calendar.google.com", if the current
-            error is
-            [google.rpc.Code.PERMISSION_DENIED][google.rpc.Code.PERMISSION_DENIED].
+            error is [google.rpc.Code.PERMISSION_DENIED][google.rpc.Code.PERMISSION_DENIED].
             </summary>
         </member>
         <member name="F:Google.Rpc.ResourceInfo.OwnerFieldNumber">
@@ -7166,7 +7072,7 @@
         <member name="P:Google.Rpc.LocalizedMessage.Locale">
             <summary>
             The locale used following the specification defined at
-            https://www.rfc-editor.org/rfc/bcp/bcp47.txt.
+            http://www.rfc-editor.org/rfc/bcp/bcp47.txt.
             Examples are: "en-US", "fr-CH", "es-MX"
             </summary>
         </member>
@@ -7176,109 +7082,6 @@
         <member name="P:Google.Rpc.LocalizedMessage.Message">
             <summary>
             The localized error message in the above locale.
-            </summary>
-        </member>
-        <member name="T:Google.Rpc.HttpReflection">
-            <summary>Holder for reflection information generated from google/rpc/http.proto</summary>
-        </member>
-        <member name="P:Google.Rpc.HttpReflection.Descriptor">
-            <summary>File descriptor for google/rpc/http.proto</summary>
-        </member>
-        <member name="T:Google.Rpc.HttpRequest">
-            <summary>
-            Represents an HTTP request.
-            </summary>
-        </member>
-        <member name="F:Google.Rpc.HttpRequest.MethodFieldNumber">
-            <summary>Field number for the "method" field.</summary>
-        </member>
-        <member name="P:Google.Rpc.HttpRequest.Method">
-            <summary>
-            The HTTP request method.
-            </summary>
-        </member>
-        <member name="F:Google.Rpc.HttpRequest.UriFieldNumber">
-            <summary>Field number for the "uri" field.</summary>
-        </member>
-        <member name="P:Google.Rpc.HttpRequest.Uri">
-            <summary>
-            The HTTP request URI.
-            </summary>
-        </member>
-        <member name="F:Google.Rpc.HttpRequest.HeadersFieldNumber">
-            <summary>Field number for the "headers" field.</summary>
-        </member>
-        <member name="P:Google.Rpc.HttpRequest.Headers">
-            <summary>
-            The HTTP request headers. The ordering of the headers is significant.
-            Multiple headers with the same key may present for the request.
-            </summary>
-        </member>
-        <member name="F:Google.Rpc.HttpRequest.BodyFieldNumber">
-            <summary>Field number for the "body" field.</summary>
-        </member>
-        <member name="P:Google.Rpc.HttpRequest.Body">
-            <summary>
-            The HTTP request body. If the body is not expected, it should be empty.
-            </summary>
-        </member>
-        <member name="T:Google.Rpc.HttpResponse">
-            <summary>
-            Represents an HTTP response.
-            </summary>
-        </member>
-        <member name="F:Google.Rpc.HttpResponse.StatusFieldNumber">
-            <summary>Field number for the "status" field.</summary>
-        </member>
-        <member name="P:Google.Rpc.HttpResponse.Status">
-            <summary>
-            The HTTP status code, such as 200 or 404.
-            </summary>
-        </member>
-        <member name="F:Google.Rpc.HttpResponse.ReasonFieldNumber">
-            <summary>Field number for the "reason" field.</summary>
-        </member>
-        <member name="P:Google.Rpc.HttpResponse.Reason">
-            <summary>
-            The HTTP reason phrase, such as "OK" or "Not Found".
-            </summary>
-        </member>
-        <member name="F:Google.Rpc.HttpResponse.HeadersFieldNumber">
-            <summary>Field number for the "headers" field.</summary>
-        </member>
-        <member name="P:Google.Rpc.HttpResponse.Headers">
-            <summary>
-            The HTTP response headers. The ordering of the headers is significant.
-            Multiple headers with the same key may present for the response.
-            </summary>
-        </member>
-        <member name="F:Google.Rpc.HttpResponse.BodyFieldNumber">
-            <summary>Field number for the "body" field.</summary>
-        </member>
-        <member name="P:Google.Rpc.HttpResponse.Body">
-            <summary>
-            The HTTP response body. If the body is not expected, it should be empty.
-            </summary>
-        </member>
-        <member name="T:Google.Rpc.HttpHeader">
-            <summary>
-            Represents an HTTP header.
-            </summary>
-        </member>
-        <member name="F:Google.Rpc.HttpHeader.KeyFieldNumber">
-            <summary>Field number for the "key" field.</summary>
-        </member>
-        <member name="P:Google.Rpc.HttpHeader.Key">
-            <summary>
-            The HTTP header key. It is case insensitive.
-            </summary>
-        </member>
-        <member name="F:Google.Rpc.HttpHeader.ValueFieldNumber">
-            <summary>Field number for the "value" field.</summary>
-        </member>
-        <member name="P:Google.Rpc.HttpHeader.Value">
-            <summary>
-            The HTTP header value.
             </summary>
         </member>
         <member name="T:Google.Rpc.StatusReflection">
@@ -7303,8 +7106,7 @@
         </member>
         <member name="P:Google.Rpc.Status.Code">
             <summary>
-            The status code, which should be an enum value of
-            [google.rpc.Code][google.rpc.Code].
+            The status code, which should be an enum value of [google.rpc.Code][google.rpc.Code].
             </summary>
         </member>
         <member name="F:Google.Rpc.Status.MessageFieldNumber">
@@ -7314,8 +7116,7 @@
             <summary>
             A developer-facing error message, which should be in English. Any
             user-facing error message should be localized and sent in the
-            [google.rpc.Status.details][google.rpc.Status.details] field, or localized
-            by the client.
+            [google.rpc.Status.details][google.rpc.Status.details] field, or localized by the client.
             </summary>
         </member>
         <member name="F:Google.Rpc.Status.DetailsFieldNumber">

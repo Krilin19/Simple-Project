@@ -28,7 +28,9 @@ using FireSharp;
 
 using Newtonsoft.Json;
 using System.Threading.Tasks;
-//using Google.Cloud.Firestore;
+using Google.Cloud.Firestore;
+using FireSharp.EventStreaming;
+using System.Threading;
 
 #endregion
 namespace STH_Automation_22
@@ -345,55 +347,55 @@ namespace STH_Automation_22
         //}
 
 
-        //async void All_Documunets_FromACollection(FirestoreDb db, Autodesk.Revit.DB.Document doc)
-        //{
-        //    Query docRef = db.Collection("Sync Manager").OrderBy("Time");
-        //    QuerySnapshot snap = await docRef.GetSnapshotAsync();
+        async void All_Documunets_FromACollection(FirestoreDb db, Autodesk.Revit.DB.Document doc)
+        {
+            Query docRef = db.Collection("Sync Manager").OrderBy("Time");
+            QuerySnapshot snap = await docRef.GetSnapshotAsync();
 
-        //    string s = "Waiting to sync:" + "\n";
-        //    if (snap.Count() != 0)
-        //    {
-        //        foreach (DocumentSnapshot project in snap)
-        //        {
-        //            if (project.Exists)
-        //            {
-        //                s += " DocUment Id = " + project.Id + "\n";
-        //                Dictionary<string, object> data2 = project.ToDictionary();
+            string s = "Waiting to sync:" + "\n";
+            if (snap.Count() != 0)
+            {
+                foreach (DocumentSnapshot project in snap)
+                {
+                    if (project.Exists)
+                    {
+                        s += " DocUment Id = " + project.Id + "\n";
+                        Dictionary<string, object> data2 = project.ToDictionary();
 
-        //                foreach (var item in data2)
-        //                {
-        //                    if (item.Key.ToString() == "Waiting")
-        //                    {
-        //                        s += item.Key.ToString() + " = " + item.Value.ToString() + "\n";
-        //                    }
-        //                }
-        //                foreach (var item in data2)
-        //                {
-        //                    if (item.Key.ToString() == "User Sync")
-        //                    {
-        //                        s += item.Key.ToString() + " = " + item.Value.ToString() + "\n";
-        //                    }
-        //                }
-        //                foreach (var item in data2)
-        //                {
-        //                    if (item.Key.ToString() == "Time")
-        //                    {
-        //                        s += item.Key.ToString() + " = " + item.Value.ToString() + "\n";
-        //                    }
-        //                }
-        //                foreach (var item in data2)
-        //                {
-        //                    if (item.Key.ToString() == "STH Project")
-        //                    {
-        //                        s += item.Key.ToString() + " = " + item.Value.ToString() + "\n";
-        //                    }
-        //                }
-        //                s += "\n";
-        //            }
-        //        }
-        //    }
-        //    TaskDialog.Show("Basic Element Info", s);
-        //}
+                        foreach (var item in data2)
+                        {
+                            if (item.Key.ToString() == "Waiting")
+                            {
+                                s += item.Key.ToString() + " = " + item.Value.ToString() + "\n";
+                            }
+                        }
+                        foreach (var item in data2)
+                        {
+                            if (item.Key.ToString() == "User Sync")
+                            {
+                                s += item.Key.ToString() + " = " + item.Value.ToString() + "\n";
+                            }
+                        }
+                        foreach (var item in data2)
+                        {
+                            if (item.Key.ToString() == "Time")
+                            {
+                                s += item.Key.ToString() + " = " + item.Value.ToString() + "\n";
+                            }
+                        }
+                        foreach (var item in data2)
+                        {
+                            if (item.Key.ToString() == "STH Project")
+                            {
+                                s += item.Key.ToString() + " = " + item.Value.ToString() + "\n";
+                            }
+                        }
+                        s += "\n";
+                    }
+                }
+            }
+            TaskDialog.Show("Basic Element Info", s);
+        }
 
         IFirebaseConfig ifc = new FirebaseConfig()
         {
@@ -404,19 +406,30 @@ namespace STH_Automation_22
 
         async void LiceCall(IFirebaseClient client)
         {
-            while (true)
-            {
-                await Task.Delay(1000);
-                FirebaseResponse res = await client.GetAsync("Alex");
-                Dictionary<string, string> data = JsonConvert.DeserializeObject<Dictionary<string, string>>(res.Body.ToString());
-                string s = "Waiting to sync:" + "\n";
-                foreach (var item in data)
-                {
-                    s += item.Key.ToString() + " = " + item.Value.ToString() + "\n";
-                }
-                TaskDialog.Show("Basic Element Info", s);
-            }
-            
+            client.Get(,)
+
+
+            FirebaseResponse res = await client.GetAsync("Alex");
+            Dictionary<string, string> result =  res.ResultAs<Dictionary<string, string>>();   
+            client.Set("Alex", "hola4");
+
+            //while (true)
+            //{
+            //    await Task.Delay(1000);
+
+
+            //    FirebaseResponse res = await client.GetAsync("Alex");
+            //    client.Set("Alex", "hola2");
+
+            //    Dictionary<string, string> data = JsonConvert.DeserializeObject<Dictionary<string, string>>(res.Body.ToString());
+            //    string s = "Waiting to sync:" + "\n";
+            //    foreach (var item in data)
+            //    {
+            //        s += item.Key.ToString() + " = " + item.Value.ToString() + "\n";
+            //    }
+            //    TaskDialog.Show("Basic Element Info", s);
+            //}
+
         }
 
         static AddInId appId = new AddInId(new Guid("9F56AA78-A136-6509-AAF8-A478F3B24BAB"));
