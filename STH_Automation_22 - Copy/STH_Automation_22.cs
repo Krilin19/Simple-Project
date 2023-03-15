@@ -19,6 +19,17 @@ using System.Windows.Media.Imaging;
 using System.Windows.Forms;
 using adWin = Autodesk.Windows;
 using System.Linq;
+using System.Collections;
+
+using FireSharp.Interfaces;
+using FireSharp.Response;
+using FireSharp.Config;
+using FireSharp;
+
+using Newtonsoft.Json;
+using System.Threading.Tasks;
+//using Google.Cloud.Firestore;
+
 #endregion
 namespace STH_Automation_22
 {
@@ -71,7 +82,7 @@ namespace STH_Automation_22
 
             Autodesk.Revit.DB.Line axis = null;
 
-            using (Transaction tx = new Transaction(doc))
+            using (Autodesk.Revit.DB.Transaction tx = new Autodesk.Revit.DB.Transaction(doc))
             {
                 tx.Start("Create Wall Section View");
 
@@ -166,7 +177,7 @@ namespace STH_Automation_22
 
             string s = "You Picked:" + "\n";
 
-            using (Transaction tx = new Transaction(doc))
+            using (Autodesk.Revit.DB.Transaction tx = new Autodesk.Revit.DB.Transaction(doc))
             {
                 tx.Start("Set Annotation Crop size");
 
@@ -211,6 +222,8 @@ namespace STH_Automation_22
                 TaskDialog.Show("Error", "Distance" + distance);
                 return modelLine;
             }
+
+
 
             XYZ norm = pta.CrossProduct(ptb);
             if (norm.GetLength() == 0)
@@ -296,7 +309,7 @@ namespace STH_Automation_22
                 double angleDegreesCorrected4 = angle4 * 180 / Math.PI;
                 Autodesk.Revit.DB.Line axis = Autodesk.Revit.DB.Line.CreateUnbound(pntEnd, XYZ.BasisZ);
 
-                using (Transaction tx = new Transaction(doc))
+                using (Autodesk.Revit.DB.Transaction tx = new Autodesk.Revit.DB.Transaction(doc))
                 {
                     tx.Start("Create Wall Section View");
 
@@ -317,7 +330,122 @@ namespace STH_Automation_22
         }
     }
 
+    [Autodesk.Revit.Attributes.Transaction(Autodesk.Revit.Attributes.TransactionMode.Manual)]
+    public class Data_base_Read : IExternalCommand
+    {
+        //public FirestoreDb datab_()
+        //{
 
+        //    string appdataFolder = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
+        //    string folderPath2 = System.IO.Path.Combine(appdataFolder, @"Autodesk\Revit\Addins\2022\STH_Automation_22\");
+        //    string path = /*ppDomain.CurrentDomain.BaseDirectory*/folderPath2 + @"revit-api-test-firebase.json";
+        //    Environment.SetEnvironmentVariable("GOOGLE_APPLICATION_CREDENTIALS", path);
+        //    FirestoreDb db = FirestoreDb.Create("revit-api-test");
+        //    return db;
+        //}
+
+
+        //async void All_Documunets_FromACollection(FirestoreDb db, Autodesk.Revit.DB.Document doc)
+        //{
+        //    Query docRef = db.Collection("Sync Manager").OrderBy("Time");
+        //    QuerySnapshot snap = await docRef.GetSnapshotAsync();
+
+        //    string s = "Waiting to sync:" + "\n";
+        //    if (snap.Count() != 0)
+        //    {
+        //        foreach (DocumentSnapshot project in snap)
+        //        {
+        //            if (project.Exists)
+        //            {
+        //                s += " DocUment Id = " + project.Id + "\n";
+        //                Dictionary<string, object> data2 = project.ToDictionary();
+
+        //                foreach (var item in data2)
+        //                {
+        //                    if (item.Key.ToString() == "Waiting")
+        //                    {
+        //                        s += item.Key.ToString() + " = " + item.Value.ToString() + "\n";
+        //                    }
+        //                }
+        //                foreach (var item in data2)
+        //                {
+        //                    if (item.Key.ToString() == "User Sync")
+        //                    {
+        //                        s += item.Key.ToString() + " = " + item.Value.ToString() + "\n";
+        //                    }
+        //                }
+        //                foreach (var item in data2)
+        //                {
+        //                    if (item.Key.ToString() == "Time")
+        //                    {
+        //                        s += item.Key.ToString() + " = " + item.Value.ToString() + "\n";
+        //                    }
+        //                }
+        //                foreach (var item in data2)
+        //                {
+        //                    if (item.Key.ToString() == "STH Project")
+        //                    {
+        //                        s += item.Key.ToString() + " = " + item.Value.ToString() + "\n";
+        //                    }
+        //                }
+        //                s += "\n";
+        //            }
+        //        }
+        //    }
+        //    TaskDialog.Show("Basic Element Info", s);
+        //}
+
+        IFirebaseConfig ifc = new FirebaseConfig()
+        {
+            AuthSecret = "i2fTbRhqctZwAWOYqdnLVYh6tbiRIO66EJSXggKW",
+            BasePath = "https://revit-api-test-default-rtdb.asia-southeast1.firebasedatabase.app"
+
+        };
+
+        async void LiceCall(IFirebaseClient client)
+        {
+            while (true)
+            {
+                await Task.Delay(1000);
+                FirebaseResponse res = await client.GetAsync("Alex");
+                Dictionary<string, string> data = JsonConvert.DeserializeObject<Dictionary<string, string>>(res.Body.ToString());
+                string s = "Waiting to sync:" + "\n";
+                foreach (var item in data)
+                {
+                    s += item.Key.ToString() + " = " + item.Value.ToString() + "\n";
+                }
+                TaskDialog.Show("Basic Element Info", s);
+            }
+            
+        }
+
+        static AddInId appId = new AddInId(new Guid("9F56AA78-A136-6509-AAF8-A478F3B24BAB"));
+        public Autodesk.Revit.UI.Result Execute(ExternalCommandData commandData, ref string message, ElementSet elementSet)
+        {
+            UIDocument uidoc = commandData.Application.ActiveUIDocument;
+            Autodesk.Revit.DB.Document doc = uidoc.Document;
+            //FirestoreDb db = datab_();
+
+            IFirebaseClient client = null;
+
+            try
+            {
+                client = new FirebaseClient(ifc);
+            }
+            catch (Exception)
+            {
+
+                
+            }
+
+            LiceCall(client);
+
+            //All_Documunets_FromACollection(db, doc);
+
+
+            return Autodesk.Revit.UI.Result.Succeeded;
+        }
+    }
 
     class ribbonUI : IExternalApplication
     {
@@ -332,20 +460,24 @@ namespace STH_Automation_22
             application.CreateRibbonTab(myRibbon_1);
             RibbonPanel panel_1 = application.CreateRibbonPanel(myRibbon_1, "STH");
           
-            PushButton Button1 = (PushButton)panel_1.AddItem(new PushButtonData("Align To Grid", "Align To Grid", dll, "STH_Automation_22.Rot_Ele_Angle_To_Grid"));
-            Button1.LargeImage = new BitmapImage(new Uri(System.IO.Path.Combine(folderPath, "AlignToGridIcon.png"), UriKind.Absolute));
-            Button1.LongDescription = "This tool helps to make parallel any line base element or family to a selected grid angle";
-            Button1.ToolTipImage = new BitmapImage(new Uri(System.IO.Path.Combine(folderPath, "AlignToGrid.jpg"), UriKind.Absolute));
+            //PushButton Button1 = (PushButton)panel_1.AddItem(new PushButtonData("Align To Grid", "Align To Grid", dll, "STH_Automation_22.Rot_Ele_Angle_To_Grid"));
+            //Button1.LargeImage = new BitmapImage(new Uri(System.IO.Path.Combine(folderPath, "AlignToGridIcon.png"), UriKind.Absolute));
+            //Button1.LongDescription = "This tool helps to make parallel any line base element or family to a selected grid angle";
+            //Button1.ToolTipImage = new BitmapImage(new Uri(System.IO.Path.Combine(folderPath, "AlignToGrid.jpg"), UriKind.Absolute));
 
-            PushButton Button2 = (PushButton)panel_1.AddItem(new PushButtonData("Set Annotation Crop", "Set Annotation Crop", dll, "STH_Automation_22.Set_Annotation_Crop"));
-            Button2.LargeImage = new BitmapImage(new Uri(System.IO.Path.Combine(folderPath, "AlignToGridIcon.png"), UriKind.Absolute));
-            Button2.LongDescription = "This tool helps to make parallel any line base element or family to a selected grid angle";
-            Button2.ToolTipImage = new BitmapImage(new Uri(System.IO.Path.Combine(folderPath, "AlignToGrid.jpg"), UriKind.Absolute));
+            //PushButton Button2 = (PushButton)panel_1.AddItem(new PushButtonData("Set Annotation Crop", "Set Annotation Crop", dll, "STH_Automation_22.Set_Annotation_Crop"));
+            //Button2.LargeImage = new BitmapImage(new Uri(System.IO.Path.Combine(folderPath, "AlignToGridIcon.png"), UriKind.Absolute));
+            //Button2.LongDescription = "This tool helps to make parallel any line base element or family to a selected grid angle";
+            //Button2.ToolTipImage = new BitmapImage(new Uri(System.IO.Path.Combine(folderPath, "AlignToGrid.jpg"), UriKind.Absolute));
 
-            PushButton Button3 = (PushButton)panel_1.AddItem(new PushButtonData("Elevate wall", "Elevate wall", dll, "STH_Automation_22.Wall_Elevation"));
-            Button3.LargeImage = new BitmapImage(new Uri(System.IO.Path.Combine(folderPath, "AlignToGridIcon.png"), UriKind.Absolute));
-            Button3.LongDescription = "This tool helps to make parallel any line base element or family to a selected grid angle";
-            Button3.ToolTipImage = new BitmapImage(new Uri(System.IO.Path.Combine(folderPath, "AlignToGrid.jpg"), UriKind.Absolute));
+            //PushButton Button3 = (PushButton)panel_1.AddItem(new PushButtonData("Elevate wall", "Elevate wall", dll, "STH_Automation_22.Wall_Elevation"));
+            //Button3.LargeImage = new BitmapImage(new Uri(System.IO.Path.Combine(folderPath, "AlignToGridIcon.png"), UriKind.Absolute));
+            //Button3.LongDescription = "This tool helps to make parallel any line base element or family to a selected grid angle";
+            //Button3.ToolTipImage = new BitmapImage(new Uri(System.IO.Path.Combine(folderPath, "AlignToGrid.jpg"), UriKind.Absolute));
+
+            PushButton Button16 = (PushButton)panel_1.AddItem(new PushButtonData("DB Read", "DB Read", dll, "STH_Automation_22.Data_base_Read"));
+            Button16.LargeImage = new BitmapImage(new Uri(Path.Combine(folderPath, "rhinoexport_32.png"), UriKind.Absolute));
+
 
             //try
             //{
