@@ -31,6 +31,7 @@ using System.Threading.Tasks;
 using Google.Cloud.Firestore;
 using FireSharp.EventStreaming;
 using System.Threading;
+using FireSharp.Extensions;
 
 #endregion
 namespace STH_Automation_22
@@ -404,20 +405,17 @@ namespace STH_Automation_22
 
         };
 
-        async void LiceCall(IFirebaseClient client)
+        async void LiceCall(IFirebaseClient client, string document_, string user_)
         {
-            client.Get(,)
-
-
-            FirebaseResponse res = await client.GetAsync("Alex");
-            Dictionary<string, string> result =  res.ResultAs<Dictionary<string, string>>();   
-            client.Set("Alex", "hola4");
+            QueryBuilder qb = null;
+          
+            FirebaseResponse res = await client.GetAsync("Sync Manager");
+            //Dictionary<string, string> result =  res.ResultAs<Dictionary<string, string>>();   
+            client.Set(document_, user_);
 
             //while (true)
             //{
             //    await Task.Delay(1000);
-
-
             //    FirebaseResponse res = await client.GetAsync("Alex");
             //    client.Set("Alex", "hola2");
 
@@ -451,7 +449,7 @@ namespace STH_Automation_22
                 
             }
 
-            LiceCall(client);
+            LiceCall(client, doc.Title,doc.Application.Username);
 
             //All_Documunets_FromACollection(db, doc);
 

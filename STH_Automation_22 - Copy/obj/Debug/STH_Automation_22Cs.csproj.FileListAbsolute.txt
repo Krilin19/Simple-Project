@@ -210,3 +210,9 @@ C:\Users\lopez\Source\Repos\Simple-Project\STH_Automation_22 - Copy\bin\Debug\Go
 C:\Users\lopez\Source\Repos\Simple-Project\STH_Automation_22 - Copy\bin\Debug\Google.Cloud.Firestore.xml
 C:\Users\lopez\Source\Repos\Simple-Project\STH_Automation_22 - Copy\bin\Debug\Google.Cloud.Firestore.V1.pdb
 C:\Users\lopez\Source\Repos\Simple-Project\STH_Automation_22 - Copy\bin\Debug\Google.Cloud.Firestore.V1.xml
+C:\Users\Alex\source\repos\Simple-Project\STH_Automation_22 - Copy\bin\Debug\Google.Cloud.Firestore.dll
+C:\Users\Alex\source\repos\Simple-Project\STH_Automation_22 - Copy\bin\Debug\Google.Cloud.Firestore.V1.dll
+C:\Users\Alex\source\repos\Simple-Project\STH_Automation_22 - Copy\bin\Debug\Google.Cloud.Firestore.pdb
+C:\Users\Alex\source\repos\Simple-Project\STH_Automation_22 - Copy\bin\Debug\Google.Cloud.Firestore.xml
+C:\Users\Alex\source\repos\Simple-Project\STH_Automation_22 - Copy\bin\Debug\Google.Cloud.Firestore.V1.pdb
+C:\Users\Alex\source\repos\Simple-Project\STH_Automation_22 - Copy\bin\Debug\Google.Cloud.Firestore.V1.xml
