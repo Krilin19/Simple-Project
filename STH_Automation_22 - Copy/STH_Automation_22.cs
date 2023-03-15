@@ -411,8 +411,8 @@ namespace STH_Automation_22
           
             FirebaseResponse res = await client.GetAsync("Sync Manager");
             //Dictionary<string, string> result =  res.ResultAs<Dictionary<string, string>>();   
-            client.Set(document_, user_);
-
+            client.Set(document_ + "/" + user_, System.DateTime.Now.ToString());
+            //client.Push(document_+"/"+user_, System.DateTime.Now.ToString());
             //while (true)
             //{
             //    await Task.Delay(1000);
