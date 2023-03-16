@@ -411,18 +411,21 @@ namespace STH_Automation_22
           
             FirebaseResponse res = await client.GetAsync("Sync Manager");
             //Dictionary<string, string> result =  res.ResultAs<Dictionary<string, string>>();   
-            client.Set(document_ + "/" + user_, System.DateTime.Now.ToString());
-            //client.Push(document_+"/"+user_, System.DateTime.Now.ToString());
+            client.Set(document_ + "/" + user_, System.DateTime.Now.ToString() + System.DateTime.Now.Minute.ToString());
+
+            //client.Delete(document_ + "/" + user_);
+
+
+
+
             //while (true)
             //{
             //    await Task.Delay(1000);
             //    FirebaseResponse res = await client.GetAsync("Alex");
             //    client.Set("Alex", "hola2");
-
             //    Dictionary<string, string> data = JsonConvert.DeserializeObject<Dictionary<string, string>>(res.Body.ToString());
             //    string s = "Waiting to sync:" + "\n";
-            //    foreach (var item in data)
-            //    {
+            //    foreach (var item in data)\
             //        s += item.Key.ToString() + " = " + item.Value.ToString() + "\n";
             //    }
             //    TaskDialog.Show("Basic Element Info", s);
